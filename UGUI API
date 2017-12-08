@@ -1,4 +1,12 @@
 --------------------
+结构体
+--------------------
+Vector2
+Vector3
+Color
+Scene
+
+--------------------
 UGUI类继承关系
 --------------------
 Object
@@ -46,3 +54,85 @@ Object
 						Toggle
 						Slider
 						Scrollbar
+-------------------------------------------------------------------------------------						
+图类
+-------------------------------------------------------------------------------------	
+Graphic:
+	ICanvasElement
+MaskableGraphic:
+	IClippable
+	IMaskable
+	IMaterialModifier
+Image:
+	ISerializationCallbackReceiver
+	ILayoutElement
+	ICanvasRaycastFilter
+Text:
+	ILayoutElement
+-------------------------------------------------------------------------------------	
+按钮
+-------------------------------------------------------------------------------------	
+Selectable:
+	IMoveHandler
+	IPointerDownHandler
+	IPointerUpHandler
+	IPointerEnterHandler
+	IPointerExitHandler
+	ISelectHandler
+	IDeselectHandler
+	IEventSystemHandler
+Button:（为什么没有实现ICanvasElement）
+	IPointerClickHandler
+	ISubmitHandler
+	IEventSystemHandler（没必要实现这个接口，因为它的父类Selectable已经实现过了）
+InputField:
+	IUpdateSelectedHandler, 
+	IBeginDragHandler, 
+	IDragHandler, 
+	IEndDragHandler, 
+	IPointerClickHandler, 
+	ISubmitHandler, 
+	ICanvasElement, 
+	ILayoutElement, 
+	IEventSystemHandler
+Toggle:
+	IPointerClickHandler, 
+	ISubmitHandler, 
+	ICanvasElement, 
+	IEventSystemHandler
+Slider:
+	IDragHandler, 
+	IInitializePotentialDragHandler, 
+	ICanvasElement, 
+	IEventSystemHandler
+Scrollbar: 
+	IBeginDragHandler, 
+	IDragHandler, 
+	IInitializePotentialDragHandler, 
+	ICanvasElement, 
+	IEventSystemHandler
+DropDown:
+	IPointerClickHandler, 
+	ISubmitHandler, 
+	ICancelHandler, 
+	IEventSystemHandler
+ScrollRect:
+	IInitializePotentialDragHandler, 
+	IBeginDragHandler, 
+	IEndDragHandler, 
+	IDragHandler, 
+	IScrollHandler, 
+	ICanvasElement, 
+	ILayoutElement, 
+	ILayoutGroup, 
+	IEventSystemHandler, 
+	ILayoutController
+Mask:
+	ICanvasRaycastFilter, 
+	IMaterialModifier
+RectMask2D：
+	IClipper
+	ICanvasRaycastFilter
+Transform
+	IEnumerable
+-------------------------------------------------------------------------------------
