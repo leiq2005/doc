@@ -1,0 +1,42 @@
+=============================================================================================================================================================
+--------------------
+Playable API
+--------------------
+关于Playable API比较有趣的是，所有Unity“原生”提供的Playable都使用C#结构体而非C++对象来保存对象。
+使用结构体的优点是无需分配GC所需的内存。这样用起来可能稍微有点复杂，但由于该API承载了未来的很多功能，所以必须注重性能问题。
+
+
+IPlayableAsset
+	PlayableAsset : ScriptableObject, IPlayableAsset  可以创建出Playable
+		TrackAsset : PlayableAsset, ISerializationCallbackReceiver, IPropertyPreview
+			///轨道类型
+			ActivationTrack : TrackAsset
+			AnimationTrack
+			AudioTrack
+			ControlTrack
+			PlayableTrack                  自定义T 函数原型：TimelineClip CreateClip<T>() where T : ScriptableObject, IPlayableAsset;
+			CinemachineTrack : TrackAsset  clip类型 CinemachineShot : PlayableAsset, IPropertyPreview
+		//轨道上的Asset资源
+		ActivationPlayableAsset : PlayableAsset, ITimelineClipAsset  //《internal class 》//从这里一下就可以看到timeline系统和playable结合了
+		AnimationPlayableAsset :  PlayableAsset, ITimelineClipAsset, IPropertyPreview
+		AudioPlayableAsset :      PlayableAsset, ITimelineClipAsset
+		ControlPlayableAsset :    PlayableAsset, ITimelineClipAsset, IPropertyPreview
+		CinemachineShot :         PlayableAsset,                     IPropertyPreview //为什么和其它继承不一样? 实现这个ITimelineClipAsset仅仅能返回该clip支持的特性
+		SlowMotionPlayableAsset : PlayableAsset  //自定义的类用PlayableTrack轨道
+		//实体资源CubeTimeline.playable
+		TimelineAsset : 	  PlayableAsset, ITimelineClipAsset, IPropertyPreview, ISerializationCallbackReceiver//这里能看出timeline可以嵌套，猜测并且可以序列化所以是文件资源
+			-------------------------------------------------------------
+			TimelinePlayable : PlayableBehaviour
+			TimelineClip : ITimelineItem, ISerializationCallbackReceiver
+			-------------------------------------------------------------
+IPlayable
+	结构体-原生提供的都是结构体
+	AnimationClipPlayable
+	AnimationMixerPlayable						
+	ScriptPlayable<T> : IPlayable, IEquatable<ScriptPlayable<T>> where T : class, IPlayableBehaviour, new()容器
+IPlayableBehaviour
+	真正的实现内容
+	PlayableBehaviour : IPlayableBehaviour, ICloneable
+		SlowMotionPlayableBehaviour
+		TimelinePlayable	
+=============================================================================================================================================================
