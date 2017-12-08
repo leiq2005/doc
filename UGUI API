@@ -1,0 +1,48 @@
+--------------------
+UGUI类继承关系
+--------------------
+Object
+	GameObject
+	ScriptableObject
+	AssetBundle
+	Shader
+	ComputeShader
+	Component
+		Transform
+			RectTransform
+		Renderer
+			MeshRenderer
+			SkinnedMeshRenderer
+		CanvasRenderer
+		Behaviour
+			Canvas
+			MonoBehaviour
+				EventTrigger
+				UIBehaviour
+					BaseInput
+					BaseInputModule
+						PointerInputModule
+							StandaloneInputModule
+							TouchInputModule
+					BaseRaycaster
+						GraphicRaycaster
+						PhysicsRaycaster
+							Physics2DRaycaster
+					ScrollRect
+					Mask
+					RectMask2D
+					EventSystem
+					LayoutElement
+					LayoutGroup
+					Graphic
+						MaskableGraphic
+							Image
+							RawImage（没实现任何接口，其实就是显示一个2D纹理图片）
+							Text
+					Selectable
+						Button
+						InputField
+						DropDown
+						Toggle
+						Slider
+						Scrollbar
